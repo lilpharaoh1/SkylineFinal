@@ -1,0 +1,113 @@
+<Player>
+    size: 55, 55
+    canvas:
+        Rectangle:
+            size: self.size
+            pos: self.pos
+            source: "Plane2.png"
+
+<Start>
+    size: 100, 60
+    canvas:
+        Rectangle:
+            size: self.size
+            pos: self.pos
+            source: "start.png"
+
+<Title>
+    size: 240, 150
+    canvas:
+        Rectangle:
+            size: self.size
+            pos: self.pos
+            source: "Title.png"
+
+<SoundOn>
+    size: 45, 45
+    canvas:
+        Rectangle:
+            size: self.size
+            pos: self.pos
+            source: "SoundOn.png"
+
+<SoundOff>
+    size: 45, 45
+    canvas:
+        Rectangle:
+            size: self.size
+            pos: self.pos
+            source: "SoundOff.png"
+
+<Barrier>
+    left_barrier_position: 0
+    right_barrier_position: self.gap_center + (self.gap_width / 2)
+
+    canvas.before:
+        Rectangle:
+            # Left Barrier
+            size: self.gap_center - (self.gap_width / 2), self.barrier_height
+            pos: self.left_barrier_position, self.barrier_Y
+            texture: self.left_barrier_texture
+            tex_coords: self.left_barrier_tex_coords
+        Rectangle:
+            # Right Barrier
+            size: app.window_size - self.gap_center - (self.gap_width / 2), self.barrier_height
+            pos: self.right_barrier_position, self.barrier_Y
+            texture: self.right_barrier_texture
+            tex_coords: self.right_barrier_tex_coords
+
+
+<SwiperGame>
+    kite: kite
+    start: start
+    title: title
+    score: score
+    highscore: highscore
+    soundonbutton: soundonbutton
+    soundoffbutton: soundoffbutton
+
+    canvas.before:
+        Rectangle:
+            size: root.width, root.height
+            pos: self.pos
+            source: "Skyline2.png"
+
+    Player:
+        id: kite
+        center_x: root.width / 2
+        center_y: -40
+
+    Start:
+        id: start
+        center_x: root.width / 2
+        center_y: root.height / 2
+
+    Title:
+        id: title
+        center_x: root.width / 2
+        center_y: root.height / 2 + 100
+
+    SoundOn:
+        id: soundonbutton
+        center_x: root.width / 10
+        center_y: root.height - 100
+
+    SoundOff:
+        id: soundoffbutton
+        center_x: (root.width / 10) - 1000
+        center_y: root.height - 100
+
+    Label:
+        id: score
+        font_size: 30
+        bold: False
+        center_x: root.width / 4
+        center_y: root.height + 300
+        text: "Score: " + str(root.score_num)
+
+    Label:
+        id: highscore
+        font_size: 30
+        center_x: root.width / 2
+        center_y: root.height + 300
+        text: "High Score: " + str(root.high_score_num)
